@@ -57,10 +57,15 @@ export default function Page() {
             });
             setCategories(results)
 
-            const categoryCounts = response.data.classified.reduce((acc, item) => {
+            // const categoryCounts = response.data.classified.reduce((acc, item) => {
+            //     acc[item.category] = (acc[item.category] || 0) + 1;
+            //     return acc;
+            // }, {});
+            const categoryCounts = results.reduce((acc, item) => {
                 acc[item.category] = (acc[item.category] || 0) + 1;
                 return acc;
             }, {});
+
 
             setChartData({
                 labels: Object.keys(categoryCounts),
