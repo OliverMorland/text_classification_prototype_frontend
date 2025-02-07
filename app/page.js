@@ -45,20 +45,31 @@ export default function Page() {
     //         datasets: [{ data: Object.values(categoryCounts), backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"] }],
     //     });
     // };
+    // const classifyFeedback = async () => {
+    //     try {
+    //         const response = await axios.post("http://localhost:8000/classify", { feedback });
+    //         setCategories(response.data.classified);
+
+    //         const categoryCounts = response.data.classified.reduce((acc, item) => {
+    //             acc[item.category] = (acc[item.category] || 0) + 1;
+    //             return acc;
+    //         }, {});
+
+    //         setChartData({
+    //             labels: Object.keys(categoryCounts),
+    //             datasets: [{ data: Object.values(categoryCounts), backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"] }],
+    //         });
+    //     } catch (error) {
+    //         console.error("Error classifying feedback", error);
+    //     }
+    // };
     const classifyFeedback = async () => {
         try {
-            const response = await axios.post("http://localhost:8000/classify", { feedback });
+            const response = await axios.post(
+                "https://text-classification-prototype-backend.onrender.com/classify", 
+                { feedback }
+            );
             setCategories(response.data.classified);
-
-            const categoryCounts = response.data.classified.reduce((acc, item) => {
-                acc[item.category] = (acc[item.category] || 0) + 1;
-                return acc;
-            }, {});
-
-            setChartData({
-                labels: Object.keys(categoryCounts),
-                datasets: [{ data: Object.values(categoryCounts), backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"] }],
-            });
         } catch (error) {
             console.error("Error classifying feedback", error);
         }
