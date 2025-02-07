@@ -47,8 +47,15 @@ export default function Page() {
     // };
     const classifyFeedback = async () => {
         try {
-            const response = await axios.post("https://text-classification-prototype-backend.onrender.com/classify", { feedback });
-            setCategories(response.data.classified);
+            // const response = await axios.post("https://text-classification-prototype-backend.onrender.com/classify", { feedback });
+            // setCategories(response.data.classified);
+
+            const dummyCategories = ["complaint about support staff", "website clarity", "website performance"];
+            const results = feedback.map(text => {
+                const randomCategory = dummyCategories[Math.floor(Math.random() * dummyCategories.length)];
+                return { feedback: text, category: randomCategory };
+            });
+            setCategories(results)
 
             const categoryCounts = response.data.classified.reduce((acc, item) => {
                 acc[item.category] = (acc[item.category] || 0) + 1;
